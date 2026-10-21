@@ -1,6 +1,5 @@
 <?php
 $menu = get_menu_by_slug('legals');
-js_log($menu);
 ?>
 
 <footer data-layout="footer">
