@@ -1,7 +1,6 @@
 <?php
 $menu = get_menu_by_slug('main');
 $logo = get_globals_logo();
-js_log($logo);
 ?>
 
 <header data-layout="header">
