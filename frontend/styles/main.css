@@ -205,6 +205,53 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     font-size: 1.25rem;
     font-weight: 400;
 }
+[data-module="about_me"] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 0;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 64px;
+}
+[data-module="about_me"] > .image {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 88%;
+    max-width: 440px;
+    justify-self: center;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+[data-module="about_me"] .content {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    min-height: 640px;
+    margin-left: -96px;
+    margin-right: 16px;
+    padding: 56px 48px 56px 120px;
+}
+[data-module="about_me"] .content::before {
+    position: absolute;
+    z-index: -1;
+    inset: -30px 0;
+    left: -80px;
+    content: '';
+    background-color: #eee9dc;
+}
+[data-module="about_me"] .title {
+    margin: 0 0 8px;
+    font-size: 2rem;
+}
+[data-module="about_me"] .content p {
+    margin: 0;
+    line-height: 1.6;
+}
 [data-module="contact"] {
     position: relative;
     min-height: 70vh;
@@ -233,8 +280,9 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 [data-module="contact"] .email-button {
     display: inline-block;
     padding: 12px 24px;
-    border: 1px solid currentColor;
     color: inherit;
+    font-weight: bold;
+    font-size: 50px;
     text-decoration: none;
 }
 
@@ -309,6 +357,10 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     object-fit: cover;
 }
 @media (max-width: 768px) {
+    [data-module="about_me"] { grid-template-columns: 1fr; gap: 0; padding: 48px 24px; }
+    [data-module="about_me"] > .image { width: 80%; max-width: 380px; justify-self: center; }
+    [data-module="about_me"] .content { min-height: 0; margin: -32px 0 0; padding: 64px 32px 32px; }
+    [data-module="about_me"] .content::before { inset: 0; }
     [data-module="overview_gallery"] .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     [data-page="project-category"] .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

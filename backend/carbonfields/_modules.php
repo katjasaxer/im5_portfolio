@@ -43,6 +43,13 @@ Container::make('post_meta', 'Module')
                     ->set_required(),
                 Field::make('text', 'button_text', 'Button-Text'),
             ])
+            // -> about_me
+            ->add_fields('about_me', 'Über mich', [
+                Field::make('image', 'image', 'Foto')->set_required(),
+                Field::make('text', 'title', 'Titel')->set_required(),
+                Field::make('textarea', 'text_1', 'Text 1')->set_rows(4)->set_required(),
+                Field::make('textarea', 'text_2', 'Text 2')->set_rows(4)->set_required(),
+            ])
 
             // todo: add new modules here
             // -> SETTINGS
@@ -60,6 +67,11 @@ function render_modules (): void {
         switch ($module['_type']) {
             case 'hero_front':
                 $module['image'] = get_media_by_id($module['image'], 'full');
+                break;
+            case 'about_me':
+                $module['image'] = !empty($module['image'])
+                    ? get_media_by_id($module['image'], 'full')
+                    : false;
                 break;
                 // todo: add data modifications for modules here as a new case
             case 'overview_gallery':
@@ -129,8 +141,8 @@ function render_modules (): void {
                     }
                 }
                 break;
-            case 'about_me':
             case 'contact':
+                break;
         }
         // -> Laden des Templates basierend auf dem Modultyp und weitergeben der Daten
         get_template_part(
