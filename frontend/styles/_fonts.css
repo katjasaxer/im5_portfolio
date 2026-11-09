@@ -1,9 +1,15 @@
-/*--- My Font ---*/
-/*regular*/
-*@font-face {
+@font-face {
     font-family: 'Bricolage Grotesque';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('../assets/fonts/Bricolage_Grotesque/static/BricolageGrotesque-Regular.ttf') format('ttf');
-}*
+    src: url('../assets/fonts/Bricolage_Grotesque/static/BricolageGrotesque-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bricolage Grotesque';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('../assets/fonts/Bricolage_Grotesque/static/BricolageGrotesque-SemiBold.ttf') format('truetype');
+}

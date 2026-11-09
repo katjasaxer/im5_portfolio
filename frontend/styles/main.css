@@ -10,8 +10,13 @@
     /* gaps & sizes */
     --gap-around: 40px;
     /* fonts */
-    --font-h1: normal 64px/120% serif;
+    --font-family: 'Bricolage Grotesque', sans-serif;
+    --font-h1: 600 64px/120% var(--font-family);
 }
+
+body { font-family: var(--font-family); font-weight: 400; }
+button, input, select, textarea { font: inherit; }
+h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 
 /* Styling of all available layout components. */
 [data-layout="header"] {
@@ -173,14 +178,32 @@
         font: var(--font-h1);
         text-align: center;
     }
-    [data-module="hero_front"] {
-        .title {
-            color: white;
-        }
-        .subline {
-            color: white;
-        }
-    }
+}
+[data-module="hero_front"] {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(#0005, #0005), var(--hero-image, linear-gradient(#555, #222));
+    background-position: center;
+    background-size: cover;
+}
+[data-module="hero_front"] .hero_front-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+}
+[data-module="hero_front"] .title {
+    margin: 0;
+    font: var(--font-h1);
+}
+[data-module="hero_front"] .subline {
+    margin: 16px 0 0;
+    font-size: 1.25rem;
+    font-weight: 400;
 }
 
 /* Styling of all available teaser components. */
