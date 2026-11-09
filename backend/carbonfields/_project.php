@@ -8,6 +8,12 @@ Container::make('post_meta', 'Projekt')
     ->add_fields([
         Field::make('image', 'image', 'Bild')->set_required(),
         Field::make('textarea', 'description', 'Beschreibung')->set_rows(3)->set_required(),
-        Field::make('textarea', 'category', 'Kategorie')->set_rows(4)->set_required(),
-        Field::make('rich_text', 'text', 'Text')->set_required(),
+        Field::make('complex', 'project_sections', 'Kategorien und Galerien')
+            ->add_fields([
+                Field::make('text', 'category', 'Kategorie')->set_required(),
+                Field::make('media_gallery', 'gallery', 'Bildergalerie')
+                    ->set_type(['image']),
+            ])
+            ->set_layout('tabbed-vertical'),
+        Field::make('rich_text', 'text', 'Text'),
     ]);

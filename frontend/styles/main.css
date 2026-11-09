@@ -76,11 +76,69 @@
 }
 [data-page="project"] {
     background-color: beige;
-    padding: 40px 100px
-    .title {
+    padding: 0 100px 40px;
+}
+[data-page="project"] .hero {
+    min-height: 55vh;
+    margin: 0 -100px 32px;
+    padding: 40px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    background-image: linear-gradient(#0006, #0006), var(--hero-image, linear-gradient(#555, #222));
+    background-size: cover;
+    background-position: center;
+}
+[data-page="project"] .title {
     font-size: 32px;
     font-weight: bold;
-    }
+}
+[data-page="project"] .category { margin: 0 0 24px; }
+[data-page="project"] .gallery {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+[data-page="project"] .gallery-item {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+[data-page="project"] .gallery-item .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 180ms ease;
+}
+[data-page="project"] .gallery-item:hover .image { transform: scale(1.05); }
+[data-page="project"] .lightbox {
+    position: fixed;
+    max-width: min(95vw, 1400px);
+    max-height: 95vh;
+    padding: 48px 16px 16px;
+    border: 0;
+    background: #111;
+}
+[data-page="project"] .lightbox::backdrop { background: #000d; }
+[data-page="project"] .lightbox-image { display: block; max-width: 100%; max-height: calc(95vh - 64px); object-fit: contain; }
+[data-page="project"] .lightbox-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    border: 0;
+    color: white;
+    background: transparent;
+    font-size: 32px;
+    cursor: pointer;
 }
 
 
@@ -125,7 +183,10 @@
 @media (max-width: 1024px) {}
 
 /* BREAKPOINT: md */
-@media (max-width: 768px) {}
+@media (max-width: 768px) {
+    [data-page="project"] { padding-right: 24px; padding-left: 24px; }
+    [data-page="project"] .hero { margin-right: -24px; margin-left: -24px; }
+}
 
 /* BREAKPOINT: sm */
 @media (max-width: 640px) {}
