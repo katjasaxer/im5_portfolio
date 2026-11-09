@@ -1,4 +1,6 @@
+
 <?php
+/*
 $data = $args['data'];
 ?>
 
@@ -7,3 +9,4 @@ $data = $args['data'];
     <h1 class="title"><?= $data['title'] ?></h1>
 </section>
 
+*/
