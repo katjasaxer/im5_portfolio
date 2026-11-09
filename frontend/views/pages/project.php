@@ -8,6 +8,10 @@ $project = get_project_by_id(get_the_ID(), 'page');
         <h1 class="title"><?= esc_html($project['title']) ?></h1>
     </section>
 
+    <?php if (!empty($project['description'])): ?>
+        <p class="lead"><?= nl2br(esc_html($project['description'])) ?></p>
+    <?php endif; ?>
+
     <?php foreach ($project['sections'] as $section): ?>
         <?php if (!empty($section['category'])): ?>
             <h2 class="category"><?= esc_html($section['category']) ?></h2>

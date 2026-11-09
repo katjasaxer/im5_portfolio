@@ -6,7 +6,7 @@
     /* colors */
     --color-white: #ffffff;
     --color-black: #000000;
-    --color-accent: #00ccff;
+    --color-accent: #000000;
     /* gaps & sizes */
     --gap-around: 40px;
     /* fonts */
@@ -43,7 +43,7 @@
     padding: var(--gap-around);
     background-color: var(--color-accent);
     .socials {
-        background-color: antiquewhite;
+        background-color: black;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
@@ -75,7 +75,7 @@
     height: 100%;
 }
 [data-page="project"] {
-    background-color: beige;
+    background-color: whitesmoke;
     padding: 0 100px 40px;
 }
 [data-page="project"] .hero {
@@ -97,6 +97,12 @@
     font-weight: bold;
 }
 [data-page="project"] .category { margin: 0 0 24px; }
+[data-page="project"] .lead {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
 [data-page="project"] .gallery {
     display: grid !important;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -166,6 +172,14 @@
         color: white;
         font: var(--font-h1);
         text-align: center;
+    }
+    [data-module="hero_front"] {
+        .title {
+            color: white;
+        }
+        .subline {
+            color: white;
+        }
     }
 }
 
