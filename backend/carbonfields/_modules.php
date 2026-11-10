@@ -3,6 +3,7 @@ use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
 $overview_gallery_fields = [];
+$overview_gallery_fields[] = Field::make('text', 'gallery_title', 'Galerie-Titel');
 for ($slot = 1; $slot <= 4; $slot++) {
     $overview_gallery_fields[] = Field::make('text', "item_title_{$slot}", "Bild {$slot}: Titel");
     $overview_gallery_fields[] = Field::make('association', "item_category_{$slot}", "Bild {$slot}: Projektkategorie")
@@ -32,6 +33,15 @@ Container::make('post_meta', 'Module')
                 Field::make('textarea', 'subline', 'Subline'),
                 Field::make('image', 'image', 'Bild')->set_required(),
                 ])
+            // -> lead
+            ->add_fields('lead', 'Lead', [
+                Field::make('textarea', 'text', 'Lead-Text')->set_rows(3)->set_required(),
+            ])
+            // -> text
+            ->add_fields('text', 'Text', [
+                Field::make('text', 'title', 'Titel')->set_required(),
+                Field::make('textarea', 'text', 'Text')->set_rows(6)->set_required(),
+            ])
             // -> overview_gallery
             ->add_fields('overview_gallery', 'Galerie', $overview_gallery_fields)
             // -> contact

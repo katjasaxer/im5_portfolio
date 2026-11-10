@@ -21,7 +21,13 @@ $project = get_project_by_id(get_the_ID(), 'page');
         <div class="gallery">
             <?php foreach ($section['gallery'] as $image): ?>
                 <button class="gallery-item" type="button" data-lightbox-src="<?= esc_url($image['src']) ?>" data-lightbox-alt="<?= esc_attr($image['alt']) ?>" aria-label="Bild vergrößern: <?= esc_attr($image['alt']) ?>">
-                    <img class="image" src="<?= esc_url($image['src']) ?>" alt="" loading="lazy">
+                    <img class="image" src="<?= esc_url($image['src']) ?>" alt="" loading="lazy" width="<?= esc_attr($image['width'] ?? '') ?>" height="<?= esc_attr($image['height'] ?? '') ?>">
+                    <?php if (!empty($image['year']) || !empty($image['caption'])): ?>
+                        <span class="gallery-caption">
+                            <?php if (!empty($image['year'])): ?><span class="gallery-year"><?= esc_html($image['year']) ?></span><?php endif; ?>
+                            <?php if (!empty($image['caption'])): ?><span class="gallery-description"><?= esc_html($image['caption']) ?></span><?php endif; ?>
+                        </span>
+                    <?php endif; ?>
                 </button>
             <?php endforeach; ?>
         </div>

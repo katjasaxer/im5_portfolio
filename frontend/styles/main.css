@@ -109,10 +109,21 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     line-height: 1.6;
 }
 [data-page="project"] .gallery {
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
     margin-bottom: 32px;
+}
+[data-page="project"] .gallery.is-masonry {
+    display: flex;
+    align-items: flex-start;
+}
+[data-page="project"] .gallery-column {
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    gap: 16px;
 }
 [data-page="project"] .gallery-item {
     display: block;
@@ -121,16 +132,23 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     border: 0;
     background: transparent;
     cursor: zoom-in;
-    aspect-ratio: 1;
-    overflow: hidden;
+    margin: 0;
+    text-align: left;
 }
 [data-page="project"] .gallery-item .image {
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     transition: transform 180ms ease;
 }
-[data-page="project"] .gallery-item:hover .image { transform: scale(1.05); }
+[data-page="project"] .gallery-caption {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 6px;
+}
+[data-page="project"] .gallery-year { font-weight: 300; }
+[data-page="project"] .gallery-description { font-weight: 700; }
 [data-page="project"] .lightbox {
     position: fixed;
     max-width: min(95vw, 1400px);
@@ -198,12 +216,13 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 }
 [data-module="hero_front"] .title {
     margin: 0;
-    font: var(--font-h1);
+    font-size: 11rem;
+    font-weight: 900;
 }
 [data-module="hero_front"] .subline {
-    margin: 16px 0 0;
-    font-size: 1.25rem;
-    font-weight: 400;
+    margin: 40px 0 0;
+    font-size: 3rem;
+    font-weight: 100;
 }
 [data-module="about_me"] {
     display: grid;
@@ -288,10 +307,17 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 
 /* Styling of all available teaser components. */
 [data-module="overview_gallery"] {
-    padding: 40px;
+    padding: 40px 120px;
+}
+[data-module="overview_gallery"] .gallery-title {
+    margin: 0 0 32px;
+    font: var(--font-h1);
+    text-align: center;
 }
 [data-module="overview_gallery"] .gallery {
     display: grid;
+    max-width: 1440px;
+    margin: 0 auto;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 24px;
 }
@@ -299,7 +325,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     position: relative;
     display: block;
     min-width: 0;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
     color: inherit;
     text-decoration: none;
@@ -335,6 +361,30 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     font-weight: 400;
     text-transform: uppercase;
 }
+[data-module="lead"] {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 48px 120px;
+}
+[data-module="lead"] .lead-text {
+    margin: 0;
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.4;
+}
+[data-module="text"] {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 48px 120px;
+}
+[data-module="text"] .title {
+    margin: 0 0 20px;
+    font-size: 2rem;
+}
+[data-module="text"] .copy {
+    max-width: 900px;
+    line-height: 1.6;
+}
 [data-page="project-category"] {
     padding: 40px;
 }
@@ -361,11 +411,16 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     [data-module="about_me"] > .image { width: 80%; max-width: 380px; justify-self: center; }
     [data-module="about_me"] .content { min-height: 0; margin: -32px 0 0; padding: 64px 32px 32px; }
     [data-module="about_me"] .content::before { inset: 0; }
+    [data-module="overview_gallery"] { padding: 40px 64px; }
     [data-module="overview_gallery"] .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    [data-module="lead"], [data-module="text"] { padding: 40px 64px; }
     [data-page="project-category"] .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 480px) {
+    [data-module="overview_gallery"] { padding: 32px 24px; }
+    [data-module="overview_gallery"] .gallery-title { font-size: 2.5rem; }
     [data-module="overview_gallery"] .gallery { grid-template-columns: 1fr; }
+    [data-module="lead"], [data-module="text"] { padding: 32px 24px; }
     [data-page="project-category"] .projects { grid-template-columns: 1fr; }
 }
 
@@ -383,12 +438,13 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 
 /* BREAKPOINT: md */
 @media (max-width: 768px) {
+    [data-page="project"] .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     [data-page="project"] { padding-right: 24px; padding-left: 24px; }
     [data-page="project"] .hero { margin-right: -24px; margin-left: -24px; }
 }
 
 /* BREAKPOINT: sm */
-@media (max-width: 640px) {}
+@media (max-width: 640px) { [data-page="project"] .gallery { grid-template-columns: 1fr; } }
 
 /* BREAKPOINT: xs */
 @media (max-width: 425px) {}

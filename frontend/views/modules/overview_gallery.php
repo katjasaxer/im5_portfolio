@@ -3,6 +3,9 @@ $data = $args['data'];
 ?>
 
 <section data-module="overview_gallery">
+    <?php if (!empty($data['gallery_title'])): ?>
+        <h1 class="gallery-title"><?= esc_html($data['gallery_title']) ?></h1>
+    <?php endif; ?>
     <?php if (!empty($data['items'])): ?>
         <div class="gallery">
             <?php foreach ($data['items'] as $item): ?>
