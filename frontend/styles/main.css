@@ -283,10 +283,9 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 [data-module="contact"] .title {
     position: absolute;
     top: 32px;
-    left: 40px;
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 400;
+    left: 200px;
+    margin: 50px;
+    font: var(h3);
     text-align: left;
 }
 [data-module="contact"] .text {
@@ -307,10 +306,10 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 
 /* Styling of all available teaser components. */
 [data-module="overview_gallery"] {
-    padding: 40px 120px;
+    padding: 20px 150px;
 }
 [data-module="overview_gallery"] .gallery-title {
-    margin: 0 0 32px;
+    margin: 10px 0 40px;
     font: var(--font-h1);
     text-align: center;
 }
@@ -318,6 +317,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     display: grid;
     max-width: 1440px;
     margin: 0 auto;
+    padding-bottom: 60px;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 24px;
 }
@@ -352,12 +352,12 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 }
 [data-module="overview_gallery"] .item-title {
     margin: 4px 0 0;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 600;
 }
 [data-module="overview_gallery"] .item-category {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 400;
     text-transform: uppercase;
 }
@@ -368,9 +368,8 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 }
 [data-module="lead"] .lead-text {
     margin: 0;
-    font-size: clamp(1.25rem, 2vw, 1.75rem);
-    font-weight: 600;
-    line-height: 1.4;
+   font-size: 1.5rem;
+   font-weight: 550;
 }
 [data-module="text"] {
     max-width: 1440px;
