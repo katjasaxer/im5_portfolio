@@ -123,7 +123,7 @@ a[href]:hover {
     padding: 0 100px 40px;
 }
 [data-page="project"] .hero {
-    min-height: 55vh;
+    min-height: 75vh;
     margin: 0 -100px 32px;
     padding: 40px 100px;
     display: flex;
@@ -258,7 +258,7 @@ a[href]:hover {
     padding: 40px;
     text-align: center;
     color: white;
-    background-image: linear-gradient(#0005, #0005), var(--hero-image, linear-gradient(#555, #222));
+    background-image: var(--hero-image);
     background-position: center;
     background-size: cover;
 }
