@@ -49,7 +49,7 @@ add_filter('attachment_fields_to_edit', function (array $fields, WP_Post $post):
         'input' => 'text',
         'value' => get_post_meta($post->ID, '_gallery_year', true),
         'required' => true,
-        'helps' => 'Jahr, das unter dem Bild in der Projektgalerie angezeigt wird.',
+        'helps' => 'Jahr, das unter dem Bild in der Galerie angezeigt wird.',
     ];
     return $fields;
 }, 10, 2);

@@ -7,6 +7,4 @@
 * Dokumentation: https://developer.wordpress.org/reference/functions/register_taxonomy/
 */
 
-add_action('init', function () {
-    require_once __DIR__ . '/_project_category.php';
-}, 0);
+// No custom taxonomies are currently registered.

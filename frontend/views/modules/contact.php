@@ -2,7 +2,7 @@
 $data = $args['data'];
 ?>
 
-<section data-module="contact">
+<section id="contact" data-module="contact">
     <h3 class="title"><?= esc_html($data['title'] ?? '') ?></h3>
     <h2 class="text"><?= nl2br(esc_html($data['text'] ?? '')) ?></h2>
     <?php if (!empty($data['email'])): ?>

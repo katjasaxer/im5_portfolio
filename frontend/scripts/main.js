@@ -1,10 +1,38 @@
 const galleries = [...document.querySelectorAll('[data-page="project"] .gallery')]
 const galleryItems = new Map(galleries.map((gallery) => [gallery, [...gallery.querySelectorAll('.gallery-item')]]))
+const menuToggle = document.querySelector('.nav-toggle')
+const mainNavigation = document.querySelector('#main-navigation')
 
 function getColumnCount() {
-    if (window.matchMedia('(max-width: 640px)').matches) return 1
-    if (window.matchMedia('(max-width: 768px)').matches) return 2
+    if (window.matchMedia('(max-width: 1024px)').matches) return 2
     return 4
+}
+
+if (menuToggle && mainNavigation) {
+    const closeMenu = () => {
+        menuToggle.setAttribute('aria-expanded', 'false')
+        menuToggle.setAttribute('aria-label', 'Menü öffnen')
+        mainNavigation.classList.remove('is-open')
+    }
+
+    menuToggle.addEventListener('click', () => {
+        const isOpen = menuToggle.getAttribute('aria-expanded') === 'true'
+        menuToggle.setAttribute('aria-expanded', String(!isOpen))
+        menuToggle.setAttribute('aria-label', isOpen ? 'Menü öffnen' : 'Menü schließen')
+        mainNavigation.classList.toggle('is-open', !isOpen)
+    })
+
+    mainNavigation.addEventListener('click', (event) => {
+        if (event.target.closest('a')) closeMenu()
+    })
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu()
+    })
+
+    window.addEventListener('resize', () => {
+        if (!window.matchMedia('(max-width: 640px)').matches) closeMenu()
+    })
 }
 
 function layoutGallery(gallery, items) {

@@ -6,11 +6,11 @@ $overview_gallery_fields = [];
 $overview_gallery_fields[] = Field::make('text', 'gallery_title', 'Galerie-Titel');
 for ($slot = 1; $slot <= 4; $slot++) {
     $overview_gallery_fields[] = Field::make('text', "item_title_{$slot}", "Bild {$slot}: Titel");
-    $overview_gallery_fields[] = Field::make('association', "item_category_{$slot}", "Bild {$slot}: Projektkategorie")
+    $overview_gallery_fields[] = Field::make('association', "item_project_{$slot}", "Bild {$slot}: Galerie")
         ->set_types([
             [
-                'type' => 'term',
-                'taxonomy' => 'project_category',
+                'type' => 'post',
+                'post_type' => 'project',
             ],
         ])
         ->set_max(1);
@@ -29,6 +29,7 @@ Container::make('post_meta', 'Module')
             ])
             // -> hero_front
             ->add_fields('hero_front', 'Hero Startseite', [
+                Field::make('image', 'logo', 'Logo über dem Titel'),
                 Field::make('text', 'title', 'Titel')->set_required(),
                 Field::make('textarea', 'subline', 'Subline'),
                 Field::make('image', 'image', 'Bild')->set_required(),
@@ -77,6 +78,9 @@ function render_modules (): void {
         switch ($module['_type']) {
             case 'hero_front':
                 $module['image'] = get_media_by_id($module['image'], 'full');
+                $module['logo'] = !empty($module['logo'])
+                    ? get_media_by_id($module['logo'], 'full')
+                    : false;
                 break;
             case 'about_me':
                 $module['image'] = !empty($module['image'])
@@ -85,29 +89,23 @@ function render_modules (): void {
                 break;
                 // todo: add data modifications for modules here as a new case
             case 'overview_gallery':
-                $format_gallery_item = static function ($title, $image_id, $category_data) {
+                $format_gallery_item = static function ($title, $image_id, $project_data) {
                     $image = $image_id ? get_media_by_id($image_id, 'm') : false;
-                    $category = is_array($category_data) ? ($category_data[0] ?? null) : null;
-                    $term = $category && ($category['type'] ?? '') === 'term'
-                        ? get_term((int) $category['id'], $category['subtype'] ?? 'project_category')
-                        : null;
-                    if (!$term && !empty($category['id'])) {
-                        $term = get_term((int) $category['id'], 'project_category');
+                    $project = is_array($project_data) ? ($project_data[0] ?? null) : null;
+                    $project_id = is_array($project) ? (int) ($project['id'] ?? 0) : 0;
+                    if (!$project_id && is_numeric($project_data)) {
+                        $project_id = (int) $project_data;
                     }
-                    if (!$term && !empty($category['value']) && preg_match('/term:[^:]+:(\d+)/', $category['value'], $matches)) {
-                        $term = get_term((int) $matches[1], 'project_category');
-                    }
-                    if (!$term && is_string($category_data) && $category_data !== '') {
-                        $term = get_term_by('name', $category_data, 'project_category');
-                    }
-                    $term_url = $term && !is_wp_error($term) ? get_term_link($term) : false;
+                    $project_url = $project_id && get_post_type($project_id) === 'project'
+                        ? get_permalink($project_id)
+                        : false;
 
                     return $image && !empty($image['src'])
                         ? [
                             'title' => $title,
                             'image' => $image,
-                            'category' => $term_url && !is_wp_error($term_url)
-                                ? ['name' => $term->name, 'url' => $term_url]
+                            'project' => $project_url && !is_wp_error($project_url)
+                                ? ['name' => get_the_title($project_id), 'url' => $project_url]
                                 : false,
                         ]
                         : false;
@@ -119,7 +117,7 @@ function render_modules (): void {
                     $item = $format_gallery_item(
                         $module["item_title_{$slot}"] ?? '',
                         $module["item_image_{$slot}"] ?? 0,
-                        $module["item_category_{$slot}"] ?? []
+                        $module["item_project_{$slot}"] ?? []
                     );
                     if ($item) {
                         $module['items'][] = $item;
@@ -132,7 +130,7 @@ function render_modules (): void {
                         $item = $format_gallery_item(
                             $old_item['title'] ?? '',
                             $old_item['image'] ?? 0,
-                            $old_item['category'] ?? []
+                            $old_item['project'] ?? []
                         );
                         if ($item) {
                             $module['items'][] = $item;
@@ -144,7 +142,7 @@ function render_modules (): void {
                     $item = $format_gallery_item(
                         $module['title'] ?? '',
                         $module['image'],
-                        $module['categorie'] ?? ($module['category'] ?? [])
+                        $module['project'] ?? []
                     );
                     if ($item) {
                         $module['items'][] = $item;

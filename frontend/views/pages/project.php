@@ -4,7 +4,7 @@ $project = get_project_by_id(get_the_ID(), 'page');
 
 <main data-page="project">
     <section class="hero"<?php if (!empty($project['image']['src'])): ?> style="--hero-image: url('<?= esc_url($project['image']['src']) ?>')"<?php endif; ?>>
-        <p class="preline">Projekt</p>
+        <p class="preline">Galerie</p>
         <h1 class="title"><?= esc_html($project['title']) ?></h1>
     </section>
 
