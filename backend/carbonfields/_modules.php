@@ -40,8 +40,10 @@ Container::make('post_meta', 'Module')
             ])
             // -> text
             ->add_fields('text', 'Text', [
-                Field::make('text', 'title', 'Titel')->set_required(),
-                Field::make('textarea', 'text', 'Text')->set_rows(6)->set_required(),
+                Field::make('text', 'title', 'Titel'),
+                Field::make('text', 'subtitle', 'Untertitel'),
+                Field::make('checkbox', 'compact_spacing', 'Kleinerer Abstand oben und unten'),
+                Field::make('rich_text', 'text', 'Text')->set_required(),
             ])
             // -> overview_gallery
             ->add_fields('overview_gallery', 'Galerie', $overview_gallery_fields)

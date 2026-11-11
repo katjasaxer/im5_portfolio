@@ -24,6 +24,18 @@ body {
 button, input, select, textarea { font: inherit; }
 h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 
+/* Give every link a subtle hover response, including linked images. */
+a[href] {
+    display: inline-block;
+    transition: transform 180ms ease;
+}
+a[href]:hover {
+    transform: scale(1.04);
+}
+@media (prefers-reduced-motion: reduce) {
+    a[href] { transition: none; }
+}
+
 /* Styling of all available layout components. */
 [data-layout="header"] {
     padding: 24px clamp(32px, 7vw, 112px);
@@ -47,9 +59,16 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
             align-self: center;
             gap: 20px;
             a {
+                display: inline-block;
+                padding: 8px 12px;
+                border-radius: 999px;
                 font-size: 22px;
                 text-decoration: none;
                 color: var(--color-white);
+            }
+            a[aria-current="page"] {
+                color: var(--color-black);
+                background-color: var(--color-white);
             }
         }
     }
@@ -178,12 +197,19 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
 [data-page="project"] .gallery-description { color: #000; font-weight: 700; }
 [data-page="project"] .lightbox {
     position: fixed;
+    inset: 0;
+    place-items: center;
+    width: fit-content;
+    height: fit-content;
     max-width: min(95vw, 1400px);
     max-height: 95vh;
+    margin: auto;
     padding: 48px 16px 16px;
     border: 0;
     background: #111;
 }
+[data-page="project"] .lightbox:not([open]) { display: none; }
+[data-page="project"] .lightbox[open] { display: grid; }
 [data-page="project"] .lightbox::backdrop { background: #000d; }
 [data-page="project"] .lightbox-image { display: block; max-width: 100%; max-height: calc(95vh - 64px); object-fit: contain; }
 [data-page="project"] .lightbox-close {
@@ -414,14 +440,36 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     margin: 0 auto;
     padding: 48px 120px;
 }
+[data-module="text"].text--compact {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
 [data-module="text"] .title {
     margin: 0 0 20px;
     font-size: 2rem;
+}
+[data-module="text"] .subtitle {
+    max-width: 900px;
+    margin: 0 0 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.6;
 }
 [data-module="text"] .copy {
     max-width: 900px;
     line-height: 1.6;
 }
+[data-module="text"] .copy p { margin: 0 0 1.5em; }
+[data-module="text"] .copy ul,
+[data-module="text"] .copy ol {
+    margin: 0 0 1em;
+    padding-left: 1.5em;
+}
+[data-module="text"] .copy ul { list-style: disc; }
+[data-module="text"] .copy ol { list-style: decimal; }
+[data-module="text"] .copy li { margin: 0.25em 0; }
+[data-module="text"] .copy > :first-child { margin-top: 0; }
+[data-module="text"] .copy > :last-child { margin-bottom: 0; }
 @media (max-width: 768px) {
     [data-module="about_me"] { grid-template-columns: 1fr; gap: 0; padding: 48px 32px; }
     [data-module="about_me"] > .image { width: calc((100% - 16px) / 2); max-width: none; justify-self: center; aspect-ratio: 3 / 4; }
@@ -499,6 +547,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     [data-module="about_me"] .title,
     [data-module="text"] .title { font-size: 1.7rem; }
     [data-module="about_me"] .content p,
+    [data-module="text"] .subtitle,
     [data-module="text"] .copy { font-size: 0.95rem; }
     [data-module="contact"] .text { font-size: clamp(1.35rem, 4vw, 2.4rem); }
     [data-module="contact"] .email-button { font-size: 34px; }
@@ -569,6 +618,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: 600; }
     [data-module="about_me"] .title,
     [data-module="text"] .title { font-size: 1.5rem; }
     [data-module="about_me"] .content p,
+    [data-module="text"] .subtitle,
     [data-module="text"] .copy { font-size: 0.9rem; }
     [data-module="contact"] .title { font-size: 1.25rem; }
     [data-module="contact"] .text { font-size: 1.25rem; }

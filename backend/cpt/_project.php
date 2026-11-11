@@ -40,12 +40,21 @@ register_post_type('project', [
     ],
 ]);
 
+// Always publish gallery permalinks under /galerie/, including links built by get_permalink().
+add_filter('post_type_link', function ($post_link, $post) {
+    if ($post->post_type !== 'project') {
+        return $post_link;
+    }
+
+    return preg_replace('~(?<=/)projekt(?=/)~', 'galerie', $post_link, 1);
+}, 10, 2);
+
 // Keep old /projekt/{slug}/ links working; WordPress canonicalizes them to /galerie/{slug}/.
 add_rewrite_rule('^projekt/([^/]+)/?$', 'index.php?project=$matches[1]', 'top');
 
 // Refresh rewrite rules once after changing the public permalink prefix.
 add_action('init', function () {
-    $rewrite_version = 'galerie-permalink-v1';
+    $rewrite_version = 'galerie-permalink-v2';
     if (get_option('im5_gallery_rewrite_version') === $rewrite_version) {
         return;
     }

@@ -74,6 +74,8 @@ function get_menu_by_slug(string $slug): array
     foreach ($menu as $item) {
         $items[] = [
             'ID' => (int) $item->ID,
+            'object_id' => (int) $item->object_id,
+            'type' => $item->type,
             'title' => $item->title,
             'url' => $item->url,
             'target' => $item->target,
