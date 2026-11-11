@@ -325,8 +325,13 @@ a[href]:hover {
     background-color: #eee9dc;
 }
 [data-module="about_me"] .title {
-    margin: 0 0 8px;
+    margin: 0;
+    font-size: 1.5rem;
+}
+[data-module="about_me"] .subtitle {
+    margin: -12px 0 0;
     font-size: 2rem;
+    font-weight: 600;
 }
 [data-module="about_me"] .content p {
     margin: 0;
@@ -348,7 +353,7 @@ a[href]:hover {
     top: 32px;
     left: 200px;
     margin: 50px;
-    font: var(h3);
+    font-size: 1.5rem;
     text-align: left;
 }
 [data-module="contact"] .text {
@@ -455,21 +460,30 @@ a[href]:hover {
     font-weight: 700;
     line-height: 1.6;
 }
-[data-module="text"] .copy {
+[data-module="text"] .copy,
+[data-module="about_me"] .copy {
     max-width: 900px;
     line-height: 1.6;
 }
-[data-module="text"] .copy p { margin: 0 0 1.5em; }
+[data-module="text"] .copy p,
+[data-module="about_me"] .copy p { margin: 0 0 0.5em; }
 [data-module="text"] .copy ul,
-[data-module="text"] .copy ol {
+[data-module="text"] .copy ol,
+[data-module="about_me"] .copy ul,
+[data-module="about_me"] .copy ol {
     margin: 0 0 1em;
     padding-left: 1.5em;
 }
-[data-module="text"] .copy ul { list-style: disc; }
-[data-module="text"] .copy ol { list-style: decimal; }
-[data-module="text"] .copy li { margin: 0.25em 0; }
-[data-module="text"] .copy > :first-child { margin-top: 0; }
-[data-module="text"] .copy > :last-child { margin-bottom: 0; }
+[data-module="text"] .copy ul,
+[data-module="about_me"] .copy ul { list-style: disc; }
+[data-module="text"] .copy ol,
+[data-module="about_me"] .copy ol { list-style: decimal; }
+[data-module="text"] .copy li,
+[data-module="about_me"] .copy li { margin: 0.25em 0; }
+[data-module="text"] .copy > :first-child,
+[data-module="about_me"] .copy > :first-child { margin-top: 0; }
+[data-module="text"] .copy > :last-child,
+[data-module="about_me"] .copy > :last-child { margin-bottom: 0; }
 @media (max-width: 768px) {
     [data-module="about_me"] { grid-template-columns: 1fr; gap: 0; padding: 48px 32px; }
     [data-module="about_me"] > .image { width: calc((100% - 16px) / 2); max-width: none; justify-self: center; aspect-ratio: 3 / 4; }
@@ -505,7 +519,7 @@ a[href]:hover {
     [data-page="project"] .lead { font-size: 22px; }
     [data-module="hero_front"] .title { font-size: 8rem; }
     [data-module="hero_front"] .subline { font-size: 2.5rem; }
-    [data-module="about_me"] .title,
+    [data-module="about_me"] .subtitle,
     [data-module="text"] .title { font-size: 1.8rem; }
     [data-module="contact"] .text { font-size: clamp(1.5rem, 4vw, 3rem); }
     [data-module="contact"] .email-button { font-size: 42px; }
@@ -544,7 +558,7 @@ a[href]:hover {
     [data-module="example"] > .title { font-size: 40px; }
     [data-module="hero_front"] .title { font-size: 6rem; }
     [data-module="hero_front"] .subline { font-size: 2rem; }
-    [data-module="about_me"] .title,
+    [data-module="about_me"] .subtitle,
     [data-module="text"] .title { font-size: 1.7rem; }
     [data-module="about_me"] .content p,
     [data-module="text"] .subtitle,
@@ -615,12 +629,13 @@ a[href]:hover {
     [data-module="hero_front"] .title { font-size: 3.5rem; }
     [data-module="hero_front"] .subline { margin-top: 24px; font-size: 1.4rem; }
     [data-module="hero_front"] .logo { max-height: 64px; max-width: min(100%, 120px); margin-bottom: 16px; }
-    [data-module="about_me"] .title,
+    [data-module="about_me"] .subtitle,
     [data-module="text"] .title { font-size: 1.5rem; }
+    [data-module="about_me"] .title,
+    [data-module="contact"] .title { font-size: 1.25rem; }
     [data-module="about_me"] .content p,
     [data-module="text"] .subtitle,
     [data-module="text"] .copy { font-size: 0.9rem; }
-    [data-module="contact"] .title { font-size: 1.25rem; }
     [data-module="contact"] .text { font-size: 1.25rem; }
     [data-module="contact"] .email-button { font-size: 1.5rem; }
     [data-module="overview_gallery"] .gallery-title { font-size: 2rem; }
