@@ -409,7 +409,7 @@ a[href]:hover {
     position: absolute;
     inset: 35% 0 0;
     content: '';
-    background: linear-gradient(transparent, rgb(0 0 0 / 70%));
+
 }
 [data-module="overview_gallery"] .card-copy {
     position: absolute;
