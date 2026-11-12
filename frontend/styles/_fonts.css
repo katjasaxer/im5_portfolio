@@ -7,6 +7,14 @@
 }
 
 @font-face {
+    font-family: 'Bricolage Grotesque Condensed';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('../assets/fonts/Bricolage_Grotesque/static/BricolageGrotesque_72pt_Condensed-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
     font-family: 'Bricolage Grotesque';
     font-style: normal;
     font-weight: 600;

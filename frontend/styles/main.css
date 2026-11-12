@@ -11,6 +11,7 @@
     --gap-around: 40px;
     /* fonts */
     --font-family: 'Bricolage Grotesque', sans-serif;
+    --font-family-heading: 'Bricolage Grotesque Condensed', var(--font-family);
     --font-h1: 600 64px/120% var(--font-family);
 }
 
@@ -22,7 +23,11 @@ body {
     font-weight: 400;
 }
 button, input, select, textarea { font: inherit; }
-h1, h2, h3, h4, h5, h6 { font-weight: 600; }
+h1, h2, h3, h4, h5, h6,
+.title, .subtitle, .gallery-title, .item-title {
+    font-family: var(--font-family-heading);
+    font-weight: 800;
+}
 
 /* Give every link a subtle hover response, including linked images. */
 a[href] {
@@ -47,8 +52,9 @@ a[href]:hover {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    .logo-link { display: block; }
+    .logo-link { display: flex; align-items: center; gap: 16px; color: var(--color-white); text-decoration: none; }
     .logo-link .logo { display: block; width: auto; max-height: 64px; object-fit: contain; }
+    .logo-link .site-title { font-family: var(--font-family-heading); font-size: 1.5rem; font-weight: 800; }
     .nav-toggle { display: none; }
  .nav-container {
         .nav {
@@ -63,6 +69,8 @@ a[href]:hover {
                 padding: 8px 12px;
                 border-radius: 999px;
                 font-size: 22px;
+                font-family: var(--font-family-heading);
+                font-weight: 800;
                 text-decoration: none;
                 color: var(--color-white);
             }
@@ -137,7 +145,7 @@ a[href]:hover {
     background-position: center;
 }
 [data-page="project"] .title {
-    font-size: 65px;
+    font-size: 60px;
     font-weight: bold;
 }
 [data-page="project"] .preline {
@@ -379,7 +387,7 @@ a[href]:hover {
 }
 [data-module="overview_gallery"] .gallery-title {
     margin: 10px 0 40px;
-    font: var(--font-h1);
+    font: 800 64px/120% var(--font-family-heading);
     text-align: center;
 }
 [data-module="overview_gallery"] .gallery {
@@ -422,7 +430,7 @@ a[href]:hover {
 [data-module="overview_gallery"] .item-title {
     margin: 4px 0 0;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 800;
 }
 [data-module="overview_gallery"] .item-project {
     display: block;
@@ -577,6 +585,7 @@ a[href]:hover {
         gap: 12px;
         padding: 12px 24px;
         .logo-link .logo { max-height: 40px; max-width: min(48vw, 150px); }
+        .logo-link .site-title { font-size: 1.2rem; }
         .nav-toggle {
             display: flex;
             width: 44px;
@@ -646,3 +655,53 @@ a[href]:hover {
 
 /* BREAKPOINT: xxs */
 @media (max-width: 400px) {}
+
+/* Slightly larger type for elements using the condensed heading face. */
+[data-layout="header"] .nav-container .nav a { font-size: 24px; }
+[data-page="project"] .title { font-size: 96px; }
+[data-module="example"] > .title,
+[data-module="overview_gallery"] .gallery-title { font-size: 96px; }
+[data-module="hero_front"] .title { font-size: 12.1rem; }
+[data-module="about_me"] .title,
+[data-module="contact"] .title { font-size: 1.65rem; }
+[data-module="about_me"] .subtitle,
+[data-module="text"] .title { font-size: 2.2rem; }
+[data-module="overview_gallery"] .item-title { font-size: 1.65rem; }
+
+@media (max-width: 1024px) {
+    [data-layout="header"] .nav-container .nav a { font-size: 22px; }
+    [data-page="project"] .title { font-size: 80px; }
+    [data-module="hero_front"] .title { font-size: 8.8rem; }
+    [data-module="about_me"] .subtitle,
+    [data-module="text"] .title { font-size: 1.98rem; }
+    [data-module="overview_gallery"] .gallery-title { font-size: 82px; }
+    [data-module="overview_gallery"] .item-title { font-size: 1.485rem; }
+}
+@media (max-width: 1024px) and (min-width: 641px) {
+    [data-layout="header"] .nav-container .nav a { font-size: 19.8px; }
+    [data-module="hero_front"] .title { font-size: 6.6rem; }
+}
+@media (max-width: 768px) {
+    [data-layout="header"] .nav-container .nav a { font-size: 19.8px; }
+    [data-page="project"] .title { font-size: 64px; }
+    [data-module="example"] > .title { font-size: 44px; }
+    [data-module="hero_front"] .title { font-size: 6.6rem; }
+    [data-module="about_me"] .subtitle,
+    [data-module="text"] .title { font-size: 1.87rem; }
+    [data-module="overview_gallery"] .gallery-title { font-size: 64px; }
+    [data-module="overview_gallery"] .item-title { font-size: 1.32rem; }
+}
+@media (max-width: 640px) {
+    [data-layout="header"] .nav-container .nav a { font-size: 17.6px; }
+}
+@media (max-width: 425px) {
+    [data-page="project"] .title { font-size: 3rem; }
+    [data-module="example"] > .title { font-size: 35.2px; }
+    [data-module="hero_front"] .title { font-size: 3.85rem; }
+    [data-module="about_me"] .subtitle,
+    [data-module="text"] .title { font-size: 1.65rem; }
+    [data-module="about_me"] .title,
+    [data-module="contact"] .title { font-size: 1.375rem; }
+    [data-module="overview_gallery"] .gallery-title { font-size: 2.8rem; }
+    [data-module="overview_gallery"] .item-title { font-size: 1.1rem; }
+}
