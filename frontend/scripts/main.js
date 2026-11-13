@@ -35,6 +35,45 @@ if (menuToggle && mainNavigation) {
     })
 }
 
+document.querySelectorAll('[data-page="project"] .gallery-category-nav').forEach((nav) => {
+    const scroller = nav.querySelector('.gallery-category-links')
+    const thumb = nav.querySelector('.gallery-category-scrollbar > span')
+    let interactionTimer
+
+    const updateScrollbar = () => {
+        const scrollableWidth = scroller.scrollWidth
+        const visibleWidth = scroller.clientWidth
+        const thumbWidth = scrollableWidth ? Math.min(100, visibleWidth / scrollableWidth * 100) : 100
+        thumb.style.width = `${thumbWidth}%`
+        thumb.style.transform = `translateX(${visibleWidth ? scroller.scrollLeft / visibleWidth * 100 : 0}%)`
+        nav.classList.toggle('is-scrollable', scrollableWidth > visibleWidth + 1)
+    }
+
+    const showScrollbar = () => {
+        nav.classList.add('is-interacting')
+        window.clearTimeout(interactionTimer)
+        interactionTimer = window.setTimeout(() => nav.classList.remove('is-interacting'), 900)
+    }
+
+    nav.querySelector('.gallery-category-arrow--left').addEventListener('click', () => {
+        scroller.scrollBy({ left: -180, behavior: 'smooth' })
+        showScrollbar()
+    })
+    nav.querySelector('.gallery-category-arrow--right').addEventListener('click', () => {
+        scroller.scrollBy({ left: 180, behavior: 'smooth' })
+        showScrollbar()
+    })
+    scroller.addEventListener('scroll', () => {
+        updateScrollbar()
+        showScrollbar()
+    }, { passive: true })
+    scroller.addEventListener('pointerdown', showScrollbar, { passive: true })
+    scroller.addEventListener('touchstart', showScrollbar, { passive: true })
+    scroller.addEventListener('wheel', showScrollbar, { passive: true })
+    window.addEventListener('resize', updateScrollbar)
+    updateScrollbar()
+})
+
 function layoutGallery(gallery, items) {
     const columnCount = getColumnCount()
     if (!items.length) return

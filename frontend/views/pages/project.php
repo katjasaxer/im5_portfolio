@@ -12,9 +12,27 @@ $project = get_project_by_id(get_the_ID(), 'page');
         <p class="lead"><?= nl2br(esc_html($project['description'])) ?></p>
     <?php endif; ?>
 
-    <?php foreach ($project['sections'] as $section): ?>
+    <?php $category_sections = array_values(array_filter($project['sections'], static fn($section) => !empty($section['category']))); ?>
+    <?php if (count($category_sections) > 1): ?>
+        <nav class="gallery-category-nav" aria-label="Galeriekategorien">
+            <button class="gallery-category-arrow gallery-category-arrow--left" type="button" aria-label="Nach links scrollen">‹</button>
+            <div class="gallery-category-scroll">
+                <div class="gallery-category-links">
+                    <?php foreach ($category_sections as $index => $section): ?>
+                        <?php $category_id = 'gallery-category-' . $index . '-' . sanitize_title($section['category']); ?>
+                        <a href="#<?= esc_attr($category_id) ?>"><?= esc_html($section['category']) ?></a>
+                    <?php endforeach; ?>
+                </div>
+                <span class="gallery-category-scrollbar" aria-hidden="true"><span></span></span>
+            </div>
+            <button class="gallery-category-arrow gallery-category-arrow--right" type="button" aria-label="Nach rechts scrollen">›</button>
+        </nav>
+    <?php endif; ?>
+
+    <?php foreach ($project['sections'] as $section_index => $section): ?>
+        <?php $category_id = !empty($section['category']) ? 'gallery-category-' . count(array_filter(array_slice($project['sections'], 0, $section_index), static fn($previous) => !empty($previous['category']))) . '-' . sanitize_title($section['category']) : ''; ?>
         <?php if (!empty($section['category'])): ?>
-            <h2 class="category"><?= esc_html($section['category']) ?></h2>
+            <h2 class="category" id="<?= esc_attr($category_id) ?>"><?= esc_html($section['category']) ?></h2>
         <?php endif; ?>
 
     <?php if (!empty($section['gallery'])): ?>

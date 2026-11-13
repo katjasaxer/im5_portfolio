@@ -1,7 +1,6 @@
 <?php
 $menu_items = get_menu_by_slug('main');
 $logo = get_globals_logo();
-$site_title = get_globals_site_title();
 $has_contact_link = false;
 $current_path = untrailingslashit((string) wp_parse_url(wp_unslash($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH));
 $site_host = (string) wp_parse_url(home_url('/'), PHP_URL_HOST);
@@ -10,7 +9,6 @@ $site_host = (string) wp_parse_url(home_url('/'), PHP_URL_HOST);
 <header data-layout="header">
     <a class="logo-link" href="<?= esc_url(home_url('/')) ?>" aria-label="Zur Startseite">
         <img class="logo" src="<?= esc_url($logo['src']) ?>" alt="<?= esc_attr($logo['alt']) ?>">
-        <?php if ($site_title !== ''): ?><span class="site-title"><?= esc_html($site_title) ?></span><?php endif; ?>
     </a>
     <button class="nav-toggle" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Menü öffnen">
         <span></span><span></span><span></span>

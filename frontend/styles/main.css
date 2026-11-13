@@ -54,7 +54,6 @@ a[href]:hover {
     align-items: center;
     .logo-link { display: flex; align-items: center; gap: 16px; color: var(--color-white); text-decoration: none; }
     .logo-link .logo { display: block; width: auto; max-height: 64px; object-fit: contain; }
-    .logo-link .site-title { font-family: var(--font-family-heading); font-size: 1.5rem; font-weight: 800; }
     .nav-toggle { display: none; }
  .nav-container {
         .nav {
@@ -84,15 +83,18 @@ a[href]:hover {
 [data-layout="footer"] {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 24px;
     padding: 24px clamp(32px, 7vw, 112px);
     background-color: var(--color-accent);
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .footer-logo img { display: block; width: 140px; height: auto; object-fit: contain; }
     .socials {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        align-self: center;
+        align-self: flex-start;
+        margin-top: 24px;
         gap: 20px;
         a img {
             display: block;
@@ -127,11 +129,11 @@ a[href]:hover {
     flex: 1 0 auto;
 }
 [data-page="project"] {
-    background-color: whitesmoke;
+    background-color: var(--color-white);
     padding: 0 100px 40px;
 }
 [data-page="project"] .hero {
-    min-height: 75vh;
+    min-height: 100vh;
     margin: 0 -100px 32px;
     padding: 40px 100px;
     display: flex;
@@ -162,6 +164,65 @@ a[href]:hover {
     font-size: 25px;
     line-height: 1.6;
 }
+[data-page="project"] .gallery-category-nav {
+    position: sticky;
+    top: 112px;
+    z-index: 90;
+    display: flex;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    margin: -16px -100px 40px;
+    padding: 14px 24px;
+    background: var(--color-white);
+    text-align: center;
+}
+[data-page="project"] .gallery-category-scroll {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+[data-page="project"] .gallery-category-links {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+[data-page="project"] .gallery-category-links::-webkit-scrollbar { display: none; }
+[data-page="project"] .gallery-category-nav a {
+    flex: 0 0 auto;
+    padding: 0;
+    color: var(--color-black);
+    font-family: var(--font-family-heading);
+    font-size: 24px;
+    font-weight: 800;
+    text-decoration: none;
+    text-align: center;
+}
+[data-page="project"] .gallery-category-arrow { display: none; }
+[data-page="project"] .gallery-category-scrollbar {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity 180ms ease;
+    pointer-events: none;
+}
+[data-page="project"] .gallery-category-scrollbar > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #777;
+    transform-origin: left center;
+}
+[data-page="project"] .gallery-category-nav.is-interacting .gallery-category-scrollbar { opacity: 1; }
+[data-page="project"] .gallery-category-scrollbar > span { width: var(--scrollbar-width, 100%); }
+[data-page="project"] .category { scroll-margin-top: 180px; }
 [data-page="project"] .gallery {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -493,6 +554,19 @@ a[href]:hover {
 [data-module="text"] .copy > :last-child,
 [data-module="about_me"] .copy > :last-child { margin-bottom: 0; }
 @media (max-width: 768px) {
+    [data-page="project"] .gallery-category-links { justify-content: flex-start; }
+    [data-page="project"] .gallery-category-scroll { flex: 1 1 auto; min-width: 0; }
+    [data-page="project"] .gallery-category-arrow {
+        display: block;
+        flex: 0 0 20px;
+        padding: 0;
+        border: 0;
+        color: var(--color-black);
+        background: transparent;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+    }
     [data-module="about_me"] { grid-template-columns: 1fr; gap: 0; padding: 48px 32px; }
     [data-module="about_me"] > .image { width: calc((100% - 16px) / 2); max-width: none; justify-self: center; aspect-ratio: 3 / 4; }
     [data-module="about_me"] .content { min-height: 0; margin: -32px 0 0; padding: 64px 32px 32px; }
@@ -540,7 +614,9 @@ a[href]:hover {
     [data-layout="header"] .nav-container .nav { gap: 16px; }
     [data-layout="header"] .nav-container .nav a { font-size: 18px; }
     [data-page="project"] { padding-right: 32px; padding-left: 32px; }
+    [data-page="project"] .gallery-category-nav { margin-right: -32px; margin-left: -32px; }
     [data-page="project"] .hero { margin-right: -32px; margin-left: -32px; }
+    [data-page="project"] .hero { min-height: 82vh; }
     [data-page="project"] .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     [data-module="hero_front"] { min-height: 82vh; }
     [data-module="hero_front"] .title { font-size: 6rem; }
@@ -559,6 +635,7 @@ a[href]:hover {
     [data-layout="header"] .nav-container .nav a { font-size: 18px; }
     [data-page="project"] .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     [data-page="project"] { padding-right: 24px; padding-left: 24px; }
+    [data-page="project"] .gallery-category-nav { margin-right: -24px; margin-left: -24px; }
     [data-page="project"] .hero { margin-right: -24px; margin-left: -24px; }
     [data-page="project"] .title { font-size: 44px; }
     [data-page="project"] .category { font-size: 26px; }
@@ -580,12 +657,16 @@ a[href]:hover {
 
 /* BREAKPOINT: sm */
 @media (max-width: 640px) {
+    [data-page="project"] .gallery-category-nav { top: 64px; margin: -16px -16px 32px; gap: 12px; padding: 12px 16px; }
+    [data-page="project"] .gallery-category-links { justify-content: flex-start; gap: 16px; padding-bottom: 5px; }
+    [data-page="project"] .gallery-category-scrollbar { bottom: 1px; }
+    [data-page="project"] .gallery-category-nav a { font-size: 17.6px; }
+    [data-page="project"] .category { scroll-margin-top: 120px; }
     [data-layout="header"] {
         flex-wrap: wrap;
         gap: 12px;
         padding: 12px 24px;
         .logo-link .logo { max-height: 40px; max-width: min(48vw, 150px); }
-        .logo-link .site-title { font-size: 1.2rem; }
         .nav-toggle {
             display: flex;
             width: 44px;
@@ -601,21 +682,30 @@ a[href]:hover {
             cursor: pointer;
         }
         .nav-toggle span { display: block; width: 26px; height: 2px; background: #fff; }
-        .nav-container { display: none; flex-basis: 100%; width: 100%; }
+        .nav-container {
+            display: none;
+            flex-basis: calc(100% + 48px);
+            width: calc(100% + 48px);
+            margin: 0 -24px -12px;
+            padding: 8px 24px 12px;
+            background: var(--color-white);
+        }
         .nav-container.is-open { display: block; }
         .nav-container .nav { flex-direction: column; align-items: flex-end; gap: 0; }
-        .nav-container .nav a { display: block; padding: 10px 0; font-size: 16px; text-align: right; }
+        .nav-container .nav a { display: block; padding: 10px 14px; color: var(--color-black); font-size: 16px; text-align: right; }
+        .nav-container .nav a[aria-current="page"] { color: var(--color-white); background: var(--color-black); }
     }
-    [data-module="hero_front"] { min-height: 78vh; padding: 32px 24px; }
+    [data-module="hero_front"] { min-height: 62vh; padding: 32px 24px; }
+    [data-page="project"] .hero { min-height: 62vh; }
     [data-module="hero_front"] .logo { max-height: 64px; max-width: min(100%, 120px); margin-bottom: 16px; }
     [data-page="project"] { padding-right: 16px; padding-left: 16px; }
     [data-page="project"] .hero { margin-right: -16px; margin-left: -16px; padding-right: 24px; padding-left: 24px; }
     [data-page="project"] .gallery { gap: 8px; }
     [data-page="project"] .gallery-column { gap: 8px; }
     [data-page="project"] .gallery-caption { flex-wrap: wrap; gap: 4px 8px; }
-    [data-module="contact"] { min-height: 50vh; padding: 56px 24px 24px; }
-    [data-module="contact"] .text { margin-top: 40px; }
-    [data-module="contact"] .email-button { margin-bottom: 20px; }
+    [data-module="contact"] { min-height: 0; padding: 56px 24px 32px; }
+    [data-module="contact"] .text { margin-top: 24px; }
+    [data-module="contact"] .email-button { margin-bottom: 0; }
     [data-module="contact"] .title { top: 20px; left: 24px; right: 24px; margin: 0; text-align: left; }
     [data-layout="footer"] .nav-container .nav a { font-size: 14px; }
     [data-layout="footer"] .socials { gap: 14px; }
@@ -670,6 +760,7 @@ a[href]:hover {
 
 @media (max-width: 1024px) {
     [data-layout="header"] .nav-container .nav a { font-size: 22px; }
+    [data-page="project"] .gallery-category-nav a { font-size: 22px; }
     [data-page="project"] .title { font-size: 80px; }
     [data-module="hero_front"] .title { font-size: 8.8rem; }
     [data-module="about_me"] .subtitle,
@@ -683,6 +774,7 @@ a[href]:hover {
 }
 @media (max-width: 768px) {
     [data-layout="header"] .nav-container .nav a { font-size: 19.8px; }
+    [data-page="project"] .gallery-category-nav a { font-size: 19.8px; }
     [data-page="project"] .title { font-size: 64px; }
     [data-module="example"] > .title { font-size: 44px; }
     [data-module="hero_front"] .title { font-size: 6.6rem; }
@@ -693,6 +785,7 @@ a[href]:hover {
 }
 @media (max-width: 640px) {
     [data-layout="header"] .nav-container .nav a { font-size: 17.6px; }
+    [data-page="project"] .gallery-category-nav a { font-size: 17.6px; }
 }
 @media (max-width: 425px) {
     [data-page="project"] .title { font-size: 3rem; }
@@ -704,4 +797,9 @@ a[href]:hover {
     [data-module="contact"] .title { font-size: 1.375rem; }
     [data-module="overview_gallery"] .gallery-title { font-size: 2.8rem; }
     [data-module="overview_gallery"] .item-title { font-size: 1.1rem; }
+}
+
+@media (max-width: 640px) {
+    [data-module="contact"] .title { font-size: 1rem; }
+    [data-module="contact"] .text { font-size: 1.8rem; }
 }
